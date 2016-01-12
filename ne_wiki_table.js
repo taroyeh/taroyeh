@@ -1,4 +1,5 @@
 function parse(jCode, headerTexts, regExp) {
+    jCode = removeComments(jCode);
     var result = [];
     var match = regExp.exec(jCode);
     while (match != null) {
@@ -61,4 +62,11 @@ function paddingString(str, digits) {
         }
     }
     return str;
+}
+
+// ref: http://stackoverflow.com/questions/25402109/regex-for-comments-in-strings-strings-in-comments-etc/25402157#25402157
+function removeComments(code) {
+    var regExp = /(['"])(?:(?!\1|\\).|\\.)*\1|\/(?![*/])(?:[^\\/]|\\.)+\/[igm]*|\/\/[^\n]*(?:\n|$)|\/\*(?:[^*]|\*(?!\/))*\*\//g;
+    var result = code.replace(regExp, "");
+    return result;
 }
