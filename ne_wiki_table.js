@@ -12,7 +12,7 @@ function parse(jCode, headerTexts, regExp) {
     return result;
 }
 
-function render(parsedData, headerTexts) {
+function render(parsedData, headerTexts, fieldCentralized) {
     var maxLength = {};
     for (var i = 0; i < headerTexts.length; i++) {
         var attr = headerTexts[i];
@@ -23,6 +23,9 @@ function render(parsedData, headerTexts) {
         var obj = parsedData[i];
         for (var i = 0; i < headerTexts.length; i++) {
             var attr = headerTexts[i];
+            if (!!fieldCentralized && fieldCentralized.hasOwnProperty(i) && fieldCentralized[i] == true) {
+                obj[attr] = " " + obj[attr] + " ";
+            }
             if (obj[attr].length > maxLength[attr]) {
                 maxLength[attr] = obj[attr].length;
             }
