@@ -66,7 +66,7 @@ function paddingString(str, digits) {
 
 // ref: http://stackoverflow.com/questions/25402109/regex-for-comments-in-strings-strings-in-comments-etc/25402157#25402157
 function removeComments(code) {
-    var regExp = /(['"])(?:(?!\1|\\).|\\.)*\1|\/(?![*/])(?:[^\\/]|\\.)+\/[igm]*|\/\/[^\n]*(?:\n|$)|\/\*(?:[^*]|\*(?!\/))*\*\//g;
+    var regExp = /\/(?![*/])(?:[^\\/]|\\.)+\/[igm]*|\/\/[^\n]*(?:\n|$)|\/\*(?:[^*]|\*(?!\/))*\*\//g;
     var result = code.replace(regExp, "");
     return result;
 }
