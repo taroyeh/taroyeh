@@ -1,3 +1,7 @@
+/**
+ * Required: https://github.com/jonschlinkert/strip-comments 
+ */
+
 function parse(jCode, headerTexts, regExp) {
     jCode = removeComments(jCode);
     var result = [];
@@ -64,9 +68,8 @@ function paddingString(str, digits) {
     return str;
 }
 
-// ref: http://stackoverflow.com/questions/25402109/regex-for-comments-in-strings-strings-in-comments-etc/25402157#25402157
 function removeComments(code) {
-    var regExp = /\/(?![*/])(?:[^\\/]|\\.)+\/[igm]*|\/\/[^\n]*(?:\n|$)|\/\*(?:[^*]|\*(?!\/))*\*\//g;
-    var result = code.replace(regExp, "");
+    var cs = new CommentStripper();
+    var result = cs.strip(code);
     return result;
 }
