@@ -24,6 +24,10 @@
                 if (pageNumber * 50 >= rowCount) {
                     data.done = true;
                 }
+                $("#resultInfo").html(
+                    "<span><b>Count: </b> " + rowCount + " </span> " + 
+                    "<span><b>Page loaded: </b> " + pageNumber + " / " + Math.ceil(rowCount / 50) + " </span>"
+                );
             },
             canLoadMore: function() {
                 return !(data.done || data.loading || data.rowCount == 0 || data.pageNumber == 0);
@@ -44,6 +48,7 @@
             },
             clearFrame: function() {
                 $frame.html("");
+                $("#resultInfo").html("");
             }
         };
     })();
@@ -74,7 +79,8 @@
         });
     }
 
-    function search(type) {
+    // Override the outer function
+    this.search = function(type) {
         var sqlStr = $("#sql").val();
         if($.trim(sqlStr) == ""){
             alert("Please enter the SQL script!");
@@ -132,7 +138,10 @@
         fontWeight: 'bold'
     })
 
+    // Result info
+    $("#excuteTime").after("<div id='resultInfo' style='display: inline-block; padding-left: 10px;'></div>");
+
     // Show features
-    $("#sql").after("<div style='display: inline-block; position: absolute; top: 5px; right: 20px; text-align: left'>* F5 executable<br />* Auto load next page<br />* Text font Modified</div>");
+    $("#sql").after("<div style='display: inline-block; position: absolute; top: 5px; right: 20px; text-align: left'>* F5 executable<br />* Auto load next page<br />* Text font modified</div>");
 
 })();
